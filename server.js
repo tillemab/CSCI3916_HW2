@@ -63,7 +63,7 @@ router.post('/signin', (req, res) => {
     } else {
         if (req.body.password == user.password) {
             var userToken = { id: user.id, username: user.username };
-            var token = jwt.sign(userToken, process.env.SECRET_KEY);
+            var token = jwt.sign(userToken, process.env.UNIQUE_KEY);
             res.json ({success: true, token: 'JWT ' + token});
         }
         else {
@@ -93,6 +93,57 @@ router.route('/testcollection')
         res.json(o);
     }
     );
+
+router.route('/movies')
+    .get((req, res) => {
+        
+         // Create JSON Object with Headers and Query from Request and the unique key
+         var o = getJSONObjectForMovieRequirement(req);
+
+         // Update Status and Message of Object
+         o.status = 200;
+         o.message = "GET movies";
+ 
+         // Return JSON Object as Response
+         res.json(o);
+
+    })
+    .post((req, res) => {
+        
+        // Create JSON Object with Headers and Query from Request and the unique key
+        var o = getJSONObjectForMovieRequirement(req);
+
+        // Update Status and Message of Object
+        o.status = 200;
+        o.message = "movie saved";
+
+        // Return JSON Object as Response
+        res.json(o);
+
+    })
+    .put(authJwtController.isAuthenticated, (req, res) => {
+        // HTTP PUT Method
+        // Requires JWT authentication.
+        // Returns a JSON object with status, message, headers, query, and env.
+        var o = getJSONObjectForMovieRequirement(req);
+        o.status = 200;
+        o.message = "movie updated";
+        res.json(o);
+    })
+    .delete(authController.isAuthenticated, (req, res) => {
+        // HTTP DELETE Method
+        // Requires Basic authentication.
+        // Returns a JSON object with status, message, headers, query, and env.
+        var o = getJSONObjectForMovieRequirement(req);
+        o.status = 200;
+        o.message = "movie deleted";
+        res.json(o);
+    })
+    .all((req, res) => {
+        // Any other HTTP Method
+        // Returns a message stating that the HTTP method is unsupported.
+        res.status(405).send({ message: 'HTTP method not supported.' });
+    });
     
 app.use('/', router);
 app.listen(process.env.PORT || 8080);
