@@ -105,7 +105,7 @@ router.route('/movies')
          o.message = "GET movies";
  
          // Return JSON Object as Response
-         res.json(o);
+         res.status(200).json(o);
 
     })
     .post((req, res) => {
@@ -118,7 +118,7 @@ router.route('/movies')
         o.message = "movie saved";
 
         // Return JSON Object as Response
-        res.json(o);
+        res.status(201).json(o);
 
     })
     .put(authJwtController.isAuthenticated, (req, res) => {
@@ -128,7 +128,7 @@ router.route('/movies')
         var o = getJSONObjectForMovieRequirement(req);
         o.status = 200;
         o.message = "movie updated";
-        res.json(o);
+        res.status(200).json(o);
     })
     .delete(authController.isAuthenticated, (req, res) => {
         // HTTP DELETE Method
@@ -137,7 +137,7 @@ router.route('/movies')
         var o = getJSONObjectForMovieRequirement(req);
         o.status = 200;
         o.message = "movie deleted";
-        res.json(o);
+        res.status(200).json(o);
     })
     .all((req, res) => {
         // Any other HTTP Method
