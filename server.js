@@ -114,7 +114,7 @@ router.route('/movies')
         var o = getJSONObjectForMovieRequirement(req);
 
         // Update Status and Message of Object
-        o.status = 200;
+        o.status = 201;
         o.message = "movie saved";
 
         // Return JSON Object as Response
