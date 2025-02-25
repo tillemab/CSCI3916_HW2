@@ -15,7 +15,7 @@
 - [x] **Step 4:** Create Routes for Signup and Signin
 - [x] **Step 5:** Update /movies Route
     > - [x] GET (Status: 200, Message: "GET movies")
-    > - [x] POST (Status: 200, Message: "movie saved")
+    > - [x] POST (Status: 201, Message: "movie saved")
     > - [x] PUT (Status: 200, Message: "movie updated", JWT Auth)
     > - [x] DELETE (Status: 200, Message: "movie deleted", Basic Auth)
 - [x] **Step 6:** Test Your Endpoints
