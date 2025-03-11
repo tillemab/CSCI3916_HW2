@@ -27,7 +27,8 @@ function getJSONObjectForMovieRequirement(req) {
     var json = {
         headers: "No headers",
         key: process.env.UNIQUE_KEY,
-        body: "No body"
+        body: "No body",
+        query: "No query"
     };
 
     if (req.body != null) {
@@ -36,6 +37,10 @@ function getJSONObjectForMovieRequirement(req) {
 
     if (req.headers != null) {
         json.headers = req.headers;
+    }
+
+    if (req.query != null) {
+        json.query = req.query;
     }
 
     return json;
